@@ -1,0 +1,48 @@
+[project]
+name = "anysqlite3"
+description = "An async wrapper for the sqlite3 module compatible with both asyncio and trio."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dynamic = ["version"]
+dependencies = ["anyio>=4.7.0"]
+
+[dependency-groups]
+dev = [
+    "poethepoet>=0.31.1",
+    "pytest-cov>=6.0.0",
+    "pytest>=8.3.4",
+    "trio>=0.27.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/merlinz01/anysqlite3"
+Repository = "https://github.com/merlinz01/anysqlite3"
+"Bug Tracker" = "https://github.com/merlinz01/anysqlite3/issues"
+Changelog = "https://github.com/merlinz01/anysqlite3/blob/master/CHANGELOG.md"
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = 'anysqlite3/version.py'
+
+[tool.hatch.build]
+include = ["anysqlite3", "pyproject.toml", "README.md", "LICENSE.txt"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["anysqlite3"]
+
+[tool.hatch.build.targets.sdist]
+packages = ["anysqlite3"]
+
+[tool.poe.tasks.build]
+cmd = "uv build"
+
+[tool.poe.tasks.test]
+cmd = "pytest"
+
+[tool.poe.tasks.htmlcov]
+cmd = "pytest --cov-report=html --cov=anysqlite3"
